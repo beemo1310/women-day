@@ -23,25 +23,16 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            perspective: 1000px;
-            transform-style: preserve-3d;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
         
         .container {
             max-width: 100%;
             z-index: 10;
             position: relative;
-            transform-style: preserve-3d;
-            animation: float-3d 6s ease-in-out infinite;
-        }
-        
-        @keyframes float-3d {
-            0%, 100% { 
-                transform: translateY(0) rotateX(5deg) rotateY(5deg); 
-            }
-            50% { 
-                transform: translateY(-10px) rotateX(-5deg) rotateY(-5deg); 
-            }
         }
         
         h1 {
@@ -49,18 +40,16 @@
             margin-bottom: 20px;
             color: #d81b60;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            transform: translateZ(20px);
         }
         
         .message {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 20px;
             font-size: 1.1rem;
             line-height: 1.6;
-            transform: translateZ(30px);
             backdrop-filter: blur(5px);
         }
         
@@ -78,143 +67,29 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            transform-style: preserve-3d;
         }
         
         .firework {
             position: absolute;
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            box-shadow: 0 0 10px #fff;
-            transform-style: preserve-3d;
+            will-change: transform, opacity;
         }
         
         .flower {
             position: absolute;
-            font-size: 2rem;
+            font-size: 1.8rem;
             opacity: 0.8;
-            animation: float 6s ease-in-out infinite;
-            transform-style: preserve-3d;
             pointer-events: none;
-            z-index: 5;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg) translateZ(0); }
-            50% { transform: translateY(-20px) rotate(10deg) translateZ(10px); }
+            z-index: 2;
+            will-change: transform, opacity;
         }
         
         .footer {
             margin-top: 20px;
             font-size: 0.9rem;
             color: #666;
-            transform: translateZ(10px);
-        }
-        
-        .petals {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            transform-style: preserve-3d;
-        }
-        
-        .petal {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-            border-radius: 50% 0 50% 50%;
-            transform: rotate(45deg);
-            opacity: 0.7;
-            transform-style: preserve-3d;
-        }
-        
-        .flower-bouquet {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 3;
-            transform-style: preserve-3d;
-        }
-        
-        .bouquet {
-            position: absolute;
-            font-size: 2.5rem;
-            opacity: 0.7;
-            animation: float-bouquet 8s linear infinite;
-            transform-style: preserve-3d;
-        }
-        
-        @keyframes float-bouquet {
-            0% {
-                transform: translateY(100vh) rotate(0deg) translateZ(-100px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg) translateZ(100px);
-                opacity: 0;
-            }
-        }
-        
-        .sparkle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px 2px #fff;
-            animation: sparkle 1.5s ease-out infinite;
-            transform-style: preserve-3d;
-        }
-        
-        @keyframes sparkle {
-            0% {
-                transform: scale(0) translateZ(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1) translateZ(20px);
-                opacity: 0;
-            }
-        }
-        
-        .flower-garden {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
-            z-index: 5;
-            transform-style: preserve-3d;
-        }
-        
-        .garden-flower {
-            font-size: 2rem;
-            opacity: 0.8;
-            animation: garden-grow 4s ease-in-out infinite;
-            transform-style: preserve-3d;
-        }
-        
-        @keyframes garden-grow {
-            0%, 100% { transform: scale(1) translateZ(0); }
-            50% { transform: scale(1.1) translateZ(10px); }
         }
         
         .touch-flowers {
@@ -224,136 +99,145 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 20;
-            transform-style: preserve-3d;
+            z-index: 5;
         }
         
         .touch-flower {
             position: absolute;
-            font-size: 2rem;
+            font-size: 1.8rem;
             pointer-events: none;
-            transform-style: preserve-3d;
-            transition: transform 0.3s ease-out;
-            z-index: 25;
+            will-change: transform, opacity;
         }
         
-        .floating-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            transform-style: preserve-3d;
-            animation: card-float 5s ease-in-out infinite;
-            backdrop-filter: blur(10px);
-        }
-        
-        @keyframes card-float {
-            0%, 100% { transform: translateY(0) rotateX(5deg) rotateY(0deg) translateZ(0); }
-            25% { transform: translateY(-5px) rotateX(8deg) rotateY(5deg) translateZ(10px); }
-            50% { transform: translateY(-10px) rotateX(5deg) rotateY(0deg) translateZ(20px); }
-            75% { transform: translateY(-5px) rotateX(2deg) rotateY(-5deg) translateZ(10px); }
-        }
-        
-        .parallax-bg {
+        .performance-warning {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            transform-style: preserve-3d;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            z-index: 100;
+            display: none;
         }
         
-        .parallax-layer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
+        /* Tối ưu animation cho mobile */
+        @media (max-width: 768px) {
+            .flower {
+                font-size: 1.5rem;
+            }
+            .touch-flower {
+                font-size: 1.5rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .message {
+                font-size: 1rem;
+                padding: 15px;
+            }
         }
         
-        .layer-1 {
-            background: radial-gradient(circle at 30% 30%, #ff9a9e 0%, transparent 50%),
-                       radial-gradient(circle at 70% 70%, #fad0c4 0%, transparent 50%);
-            transform: translateZ(-200px) scale(3);
-        }
-        
-        .layer-2 {
-            background: radial-gradient(circle at 80% 20%, #ff9a9e 0%, transparent 40%),
-                       radial-gradient(circle at 20% 80%, #fad0c4 0%, transparent 40%);
-            transform: translateZ(-100px) scale(2);
+        /* Giảm hiệu ứng cho thiết bị hiệu suất thấp */
+        @media (max-width: 480px) {
+            .flower {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="parallax-bg">
-        <div class="parallax-layer layer-1"></div>
-        <div class="parallax-layer layer-2"></div>
-    </div>
-    
     <div class="fireworks" id="fireworks"></div>
-    <div class="petals" id="petals"></div>
-    <div class="flower-bouquet" id="flowerBouquet"></div>
     <div class="touch-flowers" id="touchFlowers"></div>
     
-    <div class="flower-garden">
-        <div class="garden-flower">🌷</div>
-        <div class="garden-flower">🌹</div>
-        <div class="garden-flower">🌸</div>
-        <div class="garden-flower">🌺</div>
-        <div class="garden-flower">💐</div>
+    <div class="container">
+        <h1>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10</h1>
+        
+        <div class="message">
+            <p>Gửi lời chúc 20/10 tới tất cả những người phụ nữ tôi yêu!</p>
+            <p>Chúc các bạn luôn xinh đẹp, hạnh phúc và thành công trong cuộc sống!</p>
+            <p><span class="heart">💐</span></p>
+        </div>
+        
+        <div class="footer">
+            <p>Với tất cả tình yêu và sự trân trọng</p>
+        </div>
     </div>
     
-    <div class="container">
-        <div class="floating-card">
-            <h1>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10</h1>
-            
-            <div class="message">
-                <p>Gửi lời chúc 20/10 tới tất cả những người phụ nữ tôi yêu!</p>
-                <p>Chúc các bạn luôn xinh đẹp, hạnh phúc và thành công trong cuộc sống!</p>
-                <p><span class="heart">💐</span></p>
-            </div>
-            
-            <div class="footer">
-                <p>Với tất cả tình yêu và sự trân trọng</p>
-            </div>
-        </div>
+    <div class="performance-warning" id="performanceWarning">
+        Đang tối ưu hiệu ứng để giảm lag...
     </div>
 
     <script>
-        // Tạo hiệu ứng pháo hoa
+        // Tối ưu hóa hiệu suất cho mobile
         const fireworksContainer = document.getElementById('fireworks');
-        const petalsContainer = document.getElementById('petals');
-        const bouquetContainer = document.getElementById('flowerBouquet');
         const touchContainer = document.getElementById('touchFlowers');
-        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8000'];
+        const performanceWarning = document.getElementById('performanceWarning');
         
-        // Các loại bó hoa và hoa
-        const bouquets = ['💐', '🌷', '🌹', '🌸', '🌺', '🌻', '🥀', '🪷', '🌼'];
-        const flowers = ['🌷', '🌹', '🌸', '🌺', '🌻', '💮', '🏵️', '🌼', '🪷'];
+        // Giới hạn số lượng phần tử để tránh lag
+        const MAX_FIREWORKS = 15;
+        const MAX_TOUCH_FLOWERS = 10;
+        const MAX_FLOWERS = 8;
         
-        // Biến theo dõi vị trí chạm
-        let touchX = 0;
-        let touchY = 0;
-        let isTouching = false;
+        let currentFireworks = 0;
+        let currentTouchFlowers = 0;
+        let currentFlowers = 0;
         
-        // Theo dõi sự kiện chạm
-        document.addEventListener('touchstart', handleTouch);
-        document.addEventListener('touchmove', handleTouch);
+        const colors = ['#ff0000', '#ffff00', '#ff00ff', '#00ffff', '#ff8000'];
+        const flowers = ['🌷', '🌹', '🌸', '🌺', '🌻', '💮', '🌼'];
+        
+        // Biến kiểm soát hiệu suất
+        let isLowPerformance = false;
+        let lastTouchTime = 0;
+        const TOUCH_THROTTLE = 100; // ms
+        
+        // Kiểm tra hiệu suất
+        function checkPerformance() {
+            const startTime = performance.now();
+            for (let i = 0; i < 1000000; i++) {
+                Math.sqrt(i);
+            }
+            const endTime = performance.now();
+            
+            if (endTime - startTime > 50) {
+                isLowPerformance = true;
+                performanceWarning.style.display = 'block';
+                setTimeout(() => {
+                    performanceWarning.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // Theo dõi sự kiện chạm (tối ưu hóa)
+        document.addEventListener('touchstart', handleTouch, { passive: true });
+        document.addEventListener('touchmove', handleTouch, { passive: true });
         document.addEventListener('touchend', handleTouchEnd);
         
-        // Theo dõi sự kiện chuột (cho desktop)
+        // Theo dõi sự kiện chuột
         document.addEventListener('mousedown', handleMouse);
         document.addEventListener('mousemove', handleMouse);
         document.addEventListener('mouseup', handleMouseEnd);
         
+        let isTouching = false;
+        let touchX = 0;
+        let touchY = 0;
+        
         function handleTouch(e) {
             e.preventDefault();
+            const now = Date.now();
+            if (now - lastTouchTime < TOUCH_THROTTLE) return;
+            lastTouchTime = now;
+            
             isTouching = true;
             const touch = e.touches[0];
             touchX = touch.clientX;
             touchY = touch.clientY;
-            createTouchFlowers(touchX, touchY);
+            
+            if (currentTouchFlowers < MAX_TOUCH_FLOWERS) {
+                createTouchFlowers(touchX, touchY);
+            }
         }
         
         function handleTouchEnd() {
@@ -365,7 +249,10 @@
                 isTouching = true;
                 touchX = e.clientX;
                 touchY = e.clientY;
-                createTouchFlowers(touchX, touchY);
+                
+                if (currentTouchFlowers < MAX_TOUCH_FLOWERS) {
+                    createTouchFlowers(touchX, touchY);
+                }
             }
         }
         
@@ -373,87 +260,62 @@
             isTouching = false;
         }
         
-        // Tạo hoa theo ngón tay
+        // Tạo hoa theo ngón tay (tối ưu)
         function createTouchFlowers(x, y) {
-            if (!isTouching) return;
+            if (!isTouching || currentTouchFlowers >= MAX_TOUCH_FLOWERS) return;
             
-            for (let i = 0; i < 3; i++) {
+            const flowerCount = isLowPerformance ? 1 : 2;
+            
+            for (let i = 0; i < flowerCount; i++) {
                 setTimeout(() => {
+                    if (currentTouchFlowers >= MAX_TOUCH_FLOWERS) return;
+                    
                     const flower = document.createElement('div');
                     flower.className = 'touch-flower';
                     flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
                     
-                    // Vị trí ngẫu nhiên xung quanh điểm chạm
-                    const offsetX = (Math.random() - 0.5) * 100;
-                    const offsetY = (Math.random() - 0.5) * 100;
+                    const offsetX = (Math.random() - 0.5) * 60;
+                    const offsetY = (Math.random() - 0.5) * 60;
                     
                     flower.style.left = `${x + offsetX}px`;
                     flower.style.top = `${y + offsetY}px`;
-                    
-                    // Hiệu ứng 3D - hoa sẽ có độ sâu khác nhau
-                    const depth = Math.random() * 100 - 50;
-                    flower.style.transform = `translateZ(${depth}px) scale(${0.8 + Math.random() * 0.4})`;
-                    
-                    // Màu sắc và hiệu ứng
-                    flower.style.fontSize = `${1.5 + Math.random() * 1}rem`;
-                    flower.style.opacity = 0.8 + Math.random() * 0.2;
+                    flower.style.fontSize = `${1.2 + Math.random() * 0.6}rem`;
                     
                     touchContainer.appendChild(flower);
+                    currentTouchFlowers++;
                     
-                    // Di chuyển hoa theo thời gian
-                    let posX = x + offsetX;
-                    let posY = y + offsetY;
-                    const vx = (Math.random() - 0.5) * 2;
-                    const vy = (Math.random() - 0.5) * 2;
-                    
-                    const moveFlower = () => {
-                        posX += vx;
-                        posY += vy;
-                        
-                        flower.style.left = `${posX}px`;
-                        flower.style.top = `${posY}px`;
-                        
-                        // Mờ dần và xoay
-                        const opacity = parseFloat(flower.style.opacity);
-                        flower.style.opacity = opacity - 0.01;
+                    // Animation đơn giản
+                    let opacity = 0.8;
+                    const fadeOut = () => {
+                        opacity -= 0.02;
+                        flower.style.opacity = opacity;
                         
                         if (opacity > 0) {
-                            requestAnimationFrame(moveFlower);
+                            requestAnimationFrame(fadeOut);
                         } else {
                             flower.remove();
+                            currentTouchFlowers--;
                         }
                     };
                     
-                    moveFlower();
+                    fadeOut();
                     
-                    // Tự động xóa sau 2 giây
+                    // Tự động xóa sau 1.5 giây
                     setTimeout(() => {
                         if (flower.parentNode) {
                             flower.remove();
+                            currentTouchFlowers--;
                         }
-                    }, 2000);
+                    }, 1500);
                     
-                }, i * 100);
+                }, i * 50);
             }
         }
         
-        // Hiệu ứng parallax khi di chuyển
-        document.addEventListener('mousemove', handleParallax);
-        document.addEventListener('touchmove', handleParallax);
-        
-        function handleParallax(e) {
-            const x = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth / 2;
-            const y = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight / 2;
-            
-            const moveX = (x - window.innerWidth / 2) / 50;
-            const moveY = (y - window.innerHeight / 2) / 50;
-            
-            document.querySelector('.container').style.transform = 
-                `translateY(0) rotateX(${5 - moveY}deg) rotateY(${5 + moveX}deg)`;
-        }
-        
-        // Các hàm hiệu ứng khác (pháo hoa, hoa rơi, v.v.)
+        // Tạo pháo hoa (tối ưu)
         function createFirework() {
+            if (currentFireworks >= MAX_FIREWORKS) return;
+            
             const firework = document.createElement('div');
             firework.className = 'firework';
             
@@ -464,22 +326,21 @@
             firework.style.left = `${x}px`;
             firework.style.top = `${y}px`;
             firework.style.backgroundColor = color;
-            firework.style.boxShadow = `0 0 10px ${color}`;
-            
-            // Thêm chiều sâu 3D
-            const depth = Math.random() * 100 - 50;
-            firework.style.transform = `translateZ(${depth}px)`;
+            firework.style.boxShadow = `0 0 8px ${color}`;
             
             fireworksContainer.appendChild(firework);
+            currentFireworks++;
             
-            const particles = 20 + Math.floor(Math.random() * 20);
+            // Số lượng particle ít hơn
+            const particles = isLowPerformance ? 8 : 12;
             for (let i = 0; i < particles; i++) {
                 createParticle(x, y, color);
             }
             
             setTimeout(() => {
                 firework.remove();
-            }, 1000);
+                currentFireworks--;
+            }, 800);
         }
         
         function createParticle(x, y, color) {
@@ -491,29 +352,25 @@
             particle.style.backgroundColor = color;
             particle.style.boxShadow = `0 0 5px ${color}`;
             
-            // Thêm chiều sâu 3D
-            const depth = Math.random() * 100 - 50;
-            particle.style.transform = `translateZ(${depth}px)`;
-            
             fireworksContainer.appendChild(particle);
             
             const angle = Math.random() * Math.PI * 2;
-            const speed = 1 + Math.random() * 3;
+            const speed = 0.5 + Math.random() * 2;
             const vx = Math.cos(angle) * speed;
             const vy = Math.sin(angle) * speed;
             
             let posX = x;
             let posY = y;
+            let opacity = 1;
             
             const moveParticle = () => {
                 posX += vx;
                 posY += vy;
+                opacity -= 0.03;
                 
                 particle.style.left = `${posX}px`;
                 particle.style.top = `${posY}px`;
-                
-                const opacity = parseFloat(particle.style.opacity || 1);
-                particle.style.opacity = opacity - 0.02;
+                particle.style.opacity = opacity;
                 
                 if (opacity > 0) {
                     requestAnimationFrame(moveParticle);
@@ -525,8 +382,10 @@
             moveParticle();
         }
         
-        // Tạo các hiệu ứng khác
+        // Tạo hoa rơi (tối ưu)
         function createFlower() {
+            if (currentFlowers >= MAX_FLOWERS) return;
+            
             const flower = document.createElement('div');
             flower.className = 'flower';
             flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
@@ -536,43 +395,80 @@
             flower.style.left = `${x}px`;
             flower.style.top = `-50px`;
             
-            // Thêm chiều sâu 3D
-            const depth = Math.random() * 100 - 50;
-            flower.style.transform = `translateZ(${depth}px)`;
-            
             document.body.appendChild(flower);
+            currentFlowers++;
             
-            const duration = 5 + Math.random() * 5;
-            flower.style.animationDuration = `${duration}s`;
+            // Animation đơn giản
+            const duration = 4000 + Math.random() * 3000;
+            const startTime = Date.now();
             
+            const animateFlower = () => {
+                const elapsed = Date.now() - startTime;
+                const progress = elapsed / duration;
+                
+                if (progress < 1) {
+                    const y = -50 + (window.innerHeight + 100) * progress;
+                    const rotation = progress * 360;
+                    
+                    flower.style.top = `${y}px`;
+                    flower.style.transform = `rotate(${rotation}deg)`;
+                    
+                    requestAnimationFrame(animateFlower);
+                } else {
+                    flower.remove();
+                    currentFlowers--;
+                }
+            };
+            
+            animateFlower();
+            
+            // Tự động xóa sau duration
             setTimeout(() => {
-                flower.remove();
-            }, duration * 1000);
+                if (flower.parentNode) {
+                    flower.remove();
+                    currentFlowers--;
+                }
+            }, duration);
         }
         
-        // Tạo hiệu ứng liên tục
-        setInterval(createFirework, 300);
-        setInterval(createFlower, 800);
-        setInterval(createFloatingBouquet, 1000);
-        
-        function createFloatingBouquet() {
-            const bouquet = document.createElement('div');
-            bouquet.className = 'bouquet';
-            bouquet.innerHTML = bouquets[Math.floor(Math.random() * bouquets.length)];
+        // Khởi tạo với tần suất thấp hơn
+        function initEffects() {
+            checkPerformance();
             
-            const x = Math.random() * window.innerWidth;
+            // Giảm tần suất tạo hiệu ứng
+            const fireworkInterval = isLowPerformance ? 800 : 500;
+            const flowerInterval = isLowPerformance ? 1200 : 800;
             
-            bouquet.style.left = `${x}px`;
+            setInterval(createFirework, fireworkInterval);
+            setInterval(createFlower, flowerInterval);
             
-            bouquetContainer.appendChild(bouquet);
-            
-            const duration = 6 + Math.random() * 6;
-            bouquet.style.animationDuration = `${duration}s`;
-            
+            // Tạo hiệu ứng ban đầu
             setTimeout(() => {
-                bouquet.remove();
-            }, duration * 1000);
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(createFirework, i * 200);
+                    setTimeout(createFlower, i * 300);
+                }
+            }, 500);
         }
+        
+        // Khởi chạy khi trang đã tải xong
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initEffects);
+        } else {
+            initEffects();
+        }
+        
+        // Tối ưu hóa khi tab không active
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // Giảm hiệu ứng khi tab không active
+                fireworksContainer.innerHTML = '';
+                touchContainer.innerHTML = '';
+                currentFireworks = 0;
+                currentTouchFlowers = 0;
+                currentFlowers = 0;
+            }
+        });
     </script>
 </body>
 </html>
