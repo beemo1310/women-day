@@ -53,12 +53,6 @@
             backdrop-filter: blur(5px);
         }
         
-        .heart {
-            color: #e91e63;
-            font-size: 1.5rem;
-            margin: 0 5px;
-        }
-        
         .fireworks {
             position: fixed;
             top: 0;
@@ -122,30 +116,6 @@
             z-index: 100;
             display: none;
         }
-        
-        /* Tối ưu animation cho mobile */
-        @media (max-width: 768px) {
-            .flower {
-                font-size: 1.5rem;
-            }
-            .touch-flower {
-                font-size: 1.5rem;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
-            .message {
-                font-size: 1rem;
-                padding: 15px;
-            }
-        }
-        
-        /* Giảm hiệu ứng cho thiết bị hiệu suất thấp */
-        @media (max-width: 480px) {
-            .flower {
-                font-size: 1.2rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -156,9 +126,7 @@
         <h1>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10</h1>
         
         <div class="message">
-            <p>Gửi lời chúc 20/10 tới tất cả những người phụ nữ tôi yêu!</p>
-            <p>Chúc các bạn luôn xinh đẹp, hạnh phúc và thành công trong cuộc sống!</p>
-            <p><span class="heart">💐</span></p>
+            <p>Xin lỗi em iu rấc nhìuuu &lt;3</p>
         </div>
         
         <div class="footer">
@@ -171,12 +139,10 @@
     </div>
 
     <script>
-        // Tối ưu hóa hiệu suất cho mobile
         const fireworksContainer = document.getElementById('fireworks');
         const touchContainer = document.getElementById('touchFlowers');
         const performanceWarning = document.getElementById('performanceWarning');
         
-        // Giới hạn số lượng phần tử để tránh lag
         const MAX_FIREWORKS = 15;
         const MAX_TOUCH_FLOWERS = 10;
         const MAX_FLOWERS = 8;
@@ -188,12 +154,8 @@
         const colors = ['#ff0000', '#ffff00', '#ff00ff', '#00ffff', '#ff8000'];
         const flowers = ['🌷', '🌹', '🌸', '🌺', '🌻', '💮', '🌼'];
         
-        // Biến kiểm soát hiệu suất
         let isLowPerformance = false;
-        let lastTouchTime = 0;
-        const TOUCH_THROTTLE = 100; // ms
         
-        // Kiểm tra hiệu suất
         function checkPerformance() {
             const startTime = performance.now();
             for (let i = 0; i < 1000000; i++) {
@@ -210,109 +172,6 @@
             }
         }
         
-        // Theo dõi sự kiện chạm (tối ưu hóa)
-        document.addEventListener('touchstart', handleTouch, { passive: true });
-        document.addEventListener('touchmove', handleTouch, { passive: true });
-        document.addEventListener('touchend', handleTouchEnd);
-        
-        // Theo dõi sự kiện chuột
-        document.addEventListener('mousedown', handleMouse);
-        document.addEventListener('mousemove', handleMouse);
-        document.addEventListener('mouseup', handleMouseEnd);
-        
-        let isTouching = false;
-        let touchX = 0;
-        let touchY = 0;
-        
-        function handleTouch(e) {
-            e.preventDefault();
-            const now = Date.now();
-            if (now - lastTouchTime < TOUCH_THROTTLE) return;
-            lastTouchTime = now;
-            
-            isTouching = true;
-            const touch = e.touches[0];
-            touchX = touch.clientX;
-            touchY = touch.clientY;
-            
-            if (currentTouchFlowers < MAX_TOUCH_FLOWERS) {
-                createTouchFlowers(touchX, touchY);
-            }
-        }
-        
-        function handleTouchEnd() {
-            isTouching = false;
-        }
-        
-        function handleMouse(e) {
-            if (e.type === 'mousedown' || (e.type === 'mousemove' && e.buttons === 1)) {
-                isTouching = true;
-                touchX = e.clientX;
-                touchY = e.clientY;
-                
-                if (currentTouchFlowers < MAX_TOUCH_FLOWERS) {
-                    createTouchFlowers(touchX, touchY);
-                }
-            }
-        }
-        
-        function handleMouseEnd() {
-            isTouching = false;
-        }
-        
-        // Tạo hoa theo ngón tay (tối ưu)
-        function createTouchFlowers(x, y) {
-            if (!isTouching || currentTouchFlowers >= MAX_TOUCH_FLOWERS) return;
-            
-            const flowerCount = isLowPerformance ? 1 : 2;
-            
-            for (let i = 0; i < flowerCount; i++) {
-                setTimeout(() => {
-                    if (currentTouchFlowers >= MAX_TOUCH_FLOWERS) return;
-                    
-                    const flower = document.createElement('div');
-                    flower.className = 'touch-flower';
-                    flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
-                    
-                    const offsetX = (Math.random() - 0.5) * 60;
-                    const offsetY = (Math.random() - 0.5) * 60;
-                    
-                    flower.style.left = `${x + offsetX}px`;
-                    flower.style.top = `${y + offsetY}px`;
-                    flower.style.fontSize = `${1.2 + Math.random() * 0.6}rem`;
-                    
-                    touchContainer.appendChild(flower);
-                    currentTouchFlowers++;
-                    
-                    // Animation đơn giản
-                    let opacity = 0.8;
-                    const fadeOut = () => {
-                        opacity -= 0.02;
-                        flower.style.opacity = opacity;
-                        
-                        if (opacity > 0) {
-                            requestAnimationFrame(fadeOut);
-                        } else {
-                            flower.remove();
-                            currentTouchFlowers--;
-                        }
-                    };
-                    
-                    fadeOut();
-                    
-                    // Tự động xóa sau 1.5 giây
-                    setTimeout(() => {
-                        if (flower.parentNode) {
-                            flower.remove();
-                            currentTouchFlowers--;
-                        }
-                    }, 1500);
-                    
-                }, i * 50);
-            }
-        }
-        
-        // Tạo pháo hoa (tối ưu)
         function createFirework() {
             if (currentFireworks >= MAX_FIREWORKS) return;
             
@@ -326,16 +185,9 @@
             firework.style.left = `${x}px`;
             firework.style.top = `${y}px`;
             firework.style.backgroundColor = color;
-            firework.style.boxShadow = `0 0 8px ${color}`;
             
             fireworksContainer.appendChild(firework);
             currentFireworks++;
-            
-            // Số lượng particle ít hơn
-            const particles = isLowPerformance ? 8 : 12;
-            for (let i = 0; i < particles; i++) {
-                createParticle(x, y, color);
-            }
             
             setTimeout(() => {
                 firework.remove();
@@ -343,46 +195,6 @@
             }, 800);
         }
         
-        function createParticle(x, y, color) {
-            const particle = document.createElement('div');
-            particle.className = 'firework';
-            
-            particle.style.left = `${x}px`;
-            particle.style.top = `${y}px`;
-            particle.style.backgroundColor = color;
-            particle.style.boxShadow = `0 0 5px ${color}`;
-            
-            fireworksContainer.appendChild(particle);
-            
-            const angle = Math.random() * Math.PI * 2;
-            const speed = 0.5 + Math.random() * 2;
-            const vx = Math.cos(angle) * speed;
-            const vy = Math.sin(angle) * speed;
-            
-            let posX = x;
-            let posY = y;
-            let opacity = 1;
-            
-            const moveParticle = () => {
-                posX += vx;
-                posY += vy;
-                opacity -= 0.03;
-                
-                particle.style.left = `${posX}px`;
-                particle.style.top = `${posY}px`;
-                particle.style.opacity = opacity;
-                
-                if (opacity > 0) {
-                    requestAnimationFrame(moveParticle);
-                } else {
-                    particle.remove();
-                }
-            };
-            
-            moveParticle();
-        }
-        
-        // Tạo hoa rơi (tối ưu)
         function createFlower() {
             if (currentFlowers >= MAX_FLOWERS) return;
             
@@ -390,85 +202,29 @@
             flower.className = 'flower';
             flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
             
-            const x = Math.random() * window.innerWidth;
-            
-            flower.style.left = `${x}px`;
+            flower.style.left = `${Math.random() * window.innerWidth}px`;
             flower.style.top = `-50px`;
             
             document.body.appendChild(flower);
             currentFlowers++;
             
-            // Animation đơn giản
-            const duration = 4000 + Math.random() * 3000;
-            const startTime = Date.now();
-            
-            const animateFlower = () => {
-                const elapsed = Date.now() - startTime;
-                const progress = elapsed / duration;
-                
-                if (progress < 1) {
-                    const y = -50 + (window.innerHeight + 100) * progress;
-                    const rotation = progress * 360;
-                    
-                    flower.style.top = `${y}px`;
-                    flower.style.transform = `rotate(${rotation}deg)`;
-                    
-                    requestAnimationFrame(animateFlower);
-                } else {
-                    flower.remove();
-                    currentFlowers--;
-                }
-            };
-            
-            animateFlower();
-            
-            // Tự động xóa sau duration
             setTimeout(() => {
-                if (flower.parentNode) {
-                    flower.remove();
-                    currentFlowers--;
-                }
-            }, duration);
+                flower.remove();
+                currentFlowers--;
+            }, 4000);
         }
         
-        // Khởi tạo với tần suất thấp hơn
         function initEffects() {
             checkPerformance();
-            
-            // Giảm tần suất tạo hiệu ứng
-            const fireworkInterval = isLowPerformance ? 800 : 500;
-            const flowerInterval = isLowPerformance ? 1200 : 800;
-            
-            setInterval(createFirework, fireworkInterval);
-            setInterval(createFlower, flowerInterval);
-            
-            // Tạo hiệu ứng ban đầu
-            setTimeout(() => {
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(createFirework, i * 200);
-                    setTimeout(createFlower, i * 300);
-                }
-            }, 500);
+            setInterval(createFirework, 500);
+            setInterval(createFlower, 800);
         }
         
-        // Khởi chạy khi trang đã tải xong
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initEffects);
         } else {
             initEffects();
         }
-        
-        // Tối ưu hóa khi tab không active
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                // Giảm hiệu ứng khi tab không active
-                fireworksContainer.innerHTML = '';
-                touchContainer.innerHTML = '';
-                currentFireworks = 0;
-                currentTouchFlowers = 0;
-                currentFlowers = 0;
-            }
-        });
     </script>
 </body>
 </html>
